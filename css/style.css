@@ -1,187 +1,104 @@
-/* ── Sunlit effect (adapted from jackyzha0/sunlit) ── */
-
-body {
-  --light: #fffdfa;
-  --shadow: #1a1917;
-  --bounce-light: #f5d7a6;
-  --timing-fn: cubic-bezier(0.455, 0.190, 0.000, 0.985);
-
-  --text-primary: #1a1917;
-  --text-muted: rgba(26, 25, 23, 0.7);
-  --text-subtle: rgba(26, 25, 23, 0.6);
-
+* {
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
-  background-color: var(--light);
+  box-sizing: border-box;
 }
 
-/* ── Dappled light layer ── */
-
-#dappled-light {
-  pointer-events: none;
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  z-index: 0;
+body {
+  font-family: 'Nunito', system-ui, sans-serif;
+  background-color: #ffffff;
+  min-height: 100vh;
 }
 
-#glow,
-#glow-bounce,
-.perspective {
-  transition: opacity 2s var(--timing-fn);
-}
-
-#glow {
-  position: absolute;
-  background: linear-gradient(51deg, var(--bounce-light), var(--bounce-light) 20%, transparent);
-  height: 100%;
-  width: 100%;
-  opacity: 0.5;
-}
-
-#glow-bounce {
-  position: absolute;
-  background: linear-gradient(5deg, var(--bounce-light) 0%, transparent 30%, transparent 100%);
-  opacity: 0.5;
-  height: 100%;
-  width: 100%;
-  bottom: 0;
-}
-
-/* ── Window blinds perspective ── */
-
-.perspective {
-  position: absolute;
-  top: -30vh;
-  left: 0;
-  width: 80vw;
-  height: 130vh;
-  opacity: 0.07;
-  background-blend-mode: darken;
-  transform-origin: top left;
-  transform-style: preserve-3d;
-  transform: matrix3d(
-    0.7500,  0.0625, 0.0000, -0.0008,
-    0.0000,  1.0000, 0.0000,  0.0000,
-    0.0000,  0.0000, 1.0000,  0.0000,
-    0.0000,  0.0000, 0.0000,  1.0000
-  );
-}
-
-#leaves {
-  position: absolute;
-  bottom: -20px;
-  left: -700px;
-  width: 1600px;
-  height: 1400px;
-  background-image: url("../leaves.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  filter: url(#wind);
-  animation: billow 8s ease-in-out infinite;
-}
-
-#blinds {
+main {
   position: relative;
   width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
-#blinds .shutter,
-#blinds .bar {
-  background-color: var(--shadow);
+.content {
+  position: absolute;
+  top: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  white-space: nowrap;
 }
 
-#blinds > .shutters {
+
+.lang-toggle {
   display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 60px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1.25rem;
 }
 
-#blinds > .vertical {
-  top: 0;
-  position: absolute;
-  height: 100%;
-  width: 100%;
+.lang-btn {
+  background: none;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: oklch(39% 16% 169deg / 0.35);
+  cursor: pointer;
+  padding: 0.3rem 0.45rem;
+  transition: color 0.2s;
+}
+
+.lang-btn.active {
+  color: #E65C37;
+}
+
+.lang-btn:hover:not(.active) {
+  color: oklch(39% 16% 169deg);
+}
+
+.lang-sep {
+  color: oklch(39% 16% 169deg / 0.2);
+  font-size: 0.8rem;
+}
+
+.site-nav {
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
 }
 
-.vertical > .bar {
-  width: 5px;
-  height: 100%;
+.nav-link {
+  color: oklch(39% 16% 169deg);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
 }
 
-.shutter {
-  width: 100%;
-  height: 40px;
+.nav-link:hover {
+  color: #E65C37;
 }
 
-@keyframes billow {
-  0%   { transform: perspective(400px) rotateX(0deg) rotateY(0deg) scale(1); }
-  25%  { transform: perspective(400px) rotateX(1deg) rotateY(2deg) scale(1.02); }
-  50%  { transform: perspective(400px) rotateX(-4deg) rotateY(-2deg) scale(0.97); }
-  75%  { transform: perspective(400px) rotateX(1deg) rotateY(-1deg) scale(1.04); }
-  100% { transform: perspective(400px) rotateX(0deg) rotateY(0deg) scale(1); }
+.nav-sep {
+  color: oklch(39% 16% 169deg / 0.35);
+  font-size: 0.6rem;
 }
 
-/* ── Typography ── */
-
-.brand-title {
-  color: var(--text-primary);
-}
-
-.brand-subtitle {
-  color: var(--text-muted);
-}
-
-.ig-link {
-  color: var(--text-subtle);
-}
-
-.ig-link:hover {
-  color: var(--text-primary);
-}
-
-/* ── Progressive blur ── */
-
-#progressive-blur {
+.illustration {
   position: absolute;
-  height: 100%;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(420px, 88vw, 860px);
+  pointer-events: none;
+}
+
+.illustration img {
   width: 100%;
-}
-
-#progressive-blur > div {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  inset: 0;
-  backdrop-filter: blur(var(--blur-amount));
-  mask-image: linear-gradient(108deg, transparent, transparent var(--stop1), black var(--stop2), black);
-}
-
-#progressive-blur > div:nth-child(1) {
-  --blur-amount: 6px;
-  --stop1: 0%;
-  --stop2: 0%;
-}
-
-#progressive-blur > div:nth-child(2) {
-  --blur-amount: 12px;
-  --stop1: 40%;
-  --stop2: 80%;
-}
-
-#progressive-blur > div:nth-child(3) {
-  --blur-amount: 48px;
-  --stop1: 40%;
-  --stop2: 70%;
-}
-
-#progressive-blur > div:nth-child(4) {
-  --blur-amount: 96px;
-  --stop1: 70%;
-  --stop2: 80%;
+  height: auto;
+  display: block;
 }

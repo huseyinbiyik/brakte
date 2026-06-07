@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --teal: oklch(39% 16% 169deg);
+  --amber: #E65C37;
+  --cream: #ffffff;
+  --teal-muted: oklch(39% 16% 169deg / 0.55);
+  --teal-faint: oklch(39% 16% 169deg / 0.1);
+}
+
+body {
+  font-family: 'Nunito', system-ui, sans-serif;
+  background-color: var(--cream);
+  color: var(--teal);
+  min-height: 100vh;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2.5rem;
+  border-bottom: 1px solid var(--teal-faint);
+  position: sticky;
+  top: 0;
+  background-color: var(--cream);
+  z-index: 100;
+}
+
+.back-link {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.85rem;
+  color: var(--teal);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  opacity: 0.65;
+  transition: opacity 0.2s;
+}
+
+.back-link:hover {
+  opacity: 1;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.lang-sep {
+  color: var(--teal-faint);
+  font-size: 0.85rem;
+  font-weight: 300;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: oklch(39% 16% 169deg / 0.35);
+  cursor: pointer;
+  padding: 0.3rem 0.45rem;
+  border-radius: 3px;
+  transition: color 0.2s;
+}
+
+.lang-btn.active {
+  color: var(--amber);
+}
+
+.lang-btn:hover:not(.active) {
+  color: var(--teal);
+}
+
+.menu-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem 5rem;
+}
+
+.menu-page.hidden {
+  display: none;
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 5rem;
+  margin-bottom: 3.5rem;
+}
+
+.drinks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 5rem;
+}
+
+.drinks-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.category-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--amber);
+  padding-bottom: 0.55rem;
+  border-bottom: 1.5px solid var(--amber);
+  margin-bottom: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.menu-item {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--teal-faint);
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.item-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--teal);
+}
+
+.item-price {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--teal);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.item-desc {
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: var(--teal-muted);
+  margin-top: 0.2rem;
+  line-height: 1.55;
+}
+
+.menu-note {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 400;
+  font-style: italic;
+  color: oklch(39% 16% 169deg / 0.6);
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--teal-faint);
+}
+
+@media (max-width: 640px) {
+  .menu-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .menu-page {
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  .food-grid,
+  .drinks-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .food-grid .menu-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .drinks-left {
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
